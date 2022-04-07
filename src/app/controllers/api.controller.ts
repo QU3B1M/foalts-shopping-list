@@ -1,10 +1,10 @@
-import { Context, Get, HttpResponseOK } from '@foal/core';
+import { Context, controller, Get, HttpResponseOK } from "@foal/core";
+import { ItemController } from "./item.controller";
+import { ListController } from "./list.controller";
 
 export class ApiController {
-
-  @Get('/')
-  index(ctx: Context) {
-    return new HttpResponseOK('Hello world!');
-  }
-
+	subControllers = [
+    controller("/items", ItemController), 
+    controller("/list", ListController)
+  ];
 }
