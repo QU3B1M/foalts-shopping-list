@@ -1,3 +1,3 @@
 export { ApiController } from './api.controller';
-export { ItemController } from './item.controller';
+export { ProductController } from './product.controller';
 export { ListController } from './list.controller';

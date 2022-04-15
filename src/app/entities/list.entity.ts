@@ -7,9 +7,9 @@ export class List extends BaseEntity {
 	@PrimaryGeneratedColumn()
 	id: number;
 
-  @ManyToMany(() => ItemOnList)
-  @JoinTable()
-  ItemOnList: ItemOnList[];
+	@ManyToMany(() => ItemOnList)
+	@JoinTable()
+	ItemOnList: ItemOnList[];
 	@Column()
 	createdAt: Date;
 	@Column()
