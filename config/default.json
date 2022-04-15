@@ -1,5 +1,5 @@
 {
-  "port": "env(PORT)",
+  "port": 3001,
   "settings": {
     "loggerFormat": "tiny",
     "session": {
