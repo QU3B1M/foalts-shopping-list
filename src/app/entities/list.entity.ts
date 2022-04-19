@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BaseEntity, Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { ItemOnList } from "./item_on_list.entity";
+import { Product } from "./product.entity";
 
 @Entity()
 export class List extends BaseEntity {
@@ -9,13 +9,11 @@ export class List extends BaseEntity {
 
 	@Column()
 	name: string;
-	@ManyToMany(() => ItemOnList)
+	
+	@ManyToMany(() => Product)
 	@JoinTable()
-	items: ItemOnList[];
-	@CreateDateColumn()
-	createdAt: Date;
-	@UpdateDateColumn()
-	updated_at: Date;
+	items: Product[];
+
 	@Column()
 	status: string;
 }

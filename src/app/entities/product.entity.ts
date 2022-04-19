@@ -8,6 +8,13 @@ export class Product extends BaseEntity {
 
 	@Column({ unique: true })
 	name: string;
+
 	@Column()
 	category: string;
+
+	@Column()
+	price: number
+
+	@Column()
+	quantity: number
 }

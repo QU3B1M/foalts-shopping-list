@@ -1,5 +1,5 @@
 import { Context, Get, HttpResponseCreated, HttpResponseNotFound, HttpResponseOK, Post, ValidateBody, ValidatePathParam } from '@foal/core';
-import { ItemOnList, List, Product } from '../entities';
+import { List, Product } from '../entities';
 
 const itemSchema = {
 	type: "object",
@@ -51,33 +51,15 @@ export class ListController {
     return new HttpResponseOK(list);
   }
 
-  @Post("/:id/add_item")
+  @Post("/add_item")
 	@ValidateBody(itemSchema)
   @ValidatePathParam('id', { type: 'integer' })
 	async addItemToList(ctx: Context, { id }) {
 		const body = ctx.request.body;
-    const item = new ItemOnList()
-    const list = await List.findOne({ id: id });
     const product = await Product.findOne({ id: body.productId });
-    if (!list) {
-      return new HttpResponseNotFound();
-    }
 		if (!product) {
-			return new HttpResponseNotFound();
+      return new HttpResponseNotFound();
 		}
-		// Set item properties
-    item.product = product;
-    item.price = body.price;
-    item.quantity = body.quantity;
-		// Save item to database & return response
-		await item.save();
-    // Update the list
-    if (list.items) {
-      list.items.push(item);
-    } else {
-      list.items = [item];
-    }
-		await list.save();
 		return new HttpResponseCreated(body);
 	}
 
@@ -85,7 +67,7 @@ export class ListController {
   @ValidatePathParam('id', { type: 'integer' })
   async removeItemFromList(ctx: Context, { id }) {
     const body = ctx.request.body;
-    const item = await ItemOnList.findOne({ id: body.id });
+    const item = await Product.findOne({ id: body.id });
     const list = await List.findOne({ id: id });
     if (!list) {
       return new HttpResponseNotFound();
